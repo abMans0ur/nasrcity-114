@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import "./navbar.css"
 import { HiMiniBars4 } from "react-icons/hi2";
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
     const [menu,setMenu]=useState(false)
     const [bigMenu,setBigMenu]=useState(false)
+    const items = useSelector(x => x.cart.items)
     useEffect(()=>{
         const handleResize=()=>{
             window.addEventListener('resize',()=>{
@@ -31,6 +33,7 @@ const Navbar = () => {
                     <li><NavLink to='/home'>Home</NavLink></li>
                     <li><NavLink to='/about'>About</NavLink></li>
                     <li><NavLink to='/products'>Products</NavLink></li>
+                    <li><NavLink to='/cart'>Cart {items.length}</NavLink></li>
                 </ul>
                 <HiMiniBars4 style={menu?{display:"block"}:{display:"none"}} onClick={bigMenuHandler}  size={30} />
             </nav>
